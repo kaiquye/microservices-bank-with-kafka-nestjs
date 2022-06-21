@@ -25,4 +25,11 @@ export class UserService {
       return null;
     }
   }
+
+  async disable(id: number) {
+    const exist = await this.userRepository.exists(id, null);
+    if (!exist) new AppError('account not found', 409);
+    await this.userRepository.disable(id);
+    return true;
+  }
 }

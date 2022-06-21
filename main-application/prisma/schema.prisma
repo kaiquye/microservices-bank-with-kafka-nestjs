@@ -15,5 +15,6 @@ model USER {
     phone BigInt @unique
     password String @unique
     email String @unique
+    active Boolean @default(true)
     createAt DateTime @default(now())
 }

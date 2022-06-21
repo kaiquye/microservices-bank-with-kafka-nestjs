@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AuthenticationModule } from './services/authentication/authentication.module';
-import { UserModule } from './services/user/user.module';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { UserModule } from './modules/user/user.module';
+import { ProducersAccountModule } from './services/producers-account/producers-account.module';
 
 @Module({
-  imports: [AuthenticationModule, UserModule],
+  imports: [AuthenticationModule, UserModule, ProducersAccountModule],
 })
 export class AppModule {}

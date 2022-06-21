@@ -25,6 +25,7 @@ export class UserController {
   @Patch()
   @UseGuards(AuthGuard('jwt'))
   deactivate(@Req() user_specs) {
+    //  evento para account
     return this.userService.disable(user_specs.user.id);
   }
 }

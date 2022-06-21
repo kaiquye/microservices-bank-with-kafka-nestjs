@@ -25,7 +25,7 @@ export class ProducersAccountController implements OnModuleInit {
   constructor(@Inject('KAFKA_SERVICE') private producer: ClientKafka) {}
 
   async onModuleInit() {
-    this.producer.subscribeToResponseOf('new-account');
+    // this.producer.subscribeToResponseOf('new-account');
     await this.producer.connect();
   }
 

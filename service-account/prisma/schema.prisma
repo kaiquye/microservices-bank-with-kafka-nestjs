@@ -1,0 +1,38 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model OWNER {
+    id       Int       @id @default(autoincrement())
+    fist_name String
+    phone BigInt @unique
+    email String @unique
+    active Boolean @default(true)
+    createAt DateTime @default(now())
+    account ACCOUNT[]
+}
+
+model ACCOUNT {
+   id       Int       @id @default(autoincrement())
+   bar_code String @unique
+   model String
+   balance BigInt @default(0)
+   owner OWNER  @relation(fields: [ownerId], references: [id])
+   ownerId Int
+   account ACCOUNT[]
+}
+
+model HIST_TRANSFER {
+   value BigInt
+   date_transfer_request DateTime @default(now())
+   date_transfer_accepted DateTime @default(now())
+   bar_code_to_transfer String
+   bar_code_owner String
+   accepted @default(false)
+}

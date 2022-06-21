@@ -33,7 +33,7 @@ export class ProducersAccountController implements OnModuleInit {
   newAccount(@Body() body: NewAccountDto, @Req() request) {
     const infosNewAccount: INewAccountInterface = { ...request.user, ...body };
     console.log(infosNewAccount);
-    return this.producer.send('new-account', {
+    return this.producer.emit('create-account', {
       data: { ...infosNewAccount },
     });
   }

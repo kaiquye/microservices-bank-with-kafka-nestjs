@@ -16,6 +16,7 @@ model OWNER {
     active Boolean @default(true)
     createAt DateTime @default(now())
     account ACCOUNT[]
+    history_of_transfers HIST_TRANSFERS[]
 }
 
 model ACCOUNT {
@@ -25,14 +26,16 @@ model ACCOUNT {
    balance BigInt @default(0)
    owner OWNER  @relation(fields: [ownerId], references: [id])
    ownerId Int
-   account ACCOUNT[]
 }
 
-model HIST_TRANSFER {
+model HIST_TRANSFERS {
+   id       Int       @id @default(autoincrement())
    value BigInt
    date_transfer_request DateTime @default(now())
    date_transfer_accepted DateTime @default(now())
    bar_code_to_transfer String
    bar_code_owner String
-   accepted @default(false)
+   accepted Boolean @default(false)
+   owner OWNER  @relation(fields: [ownerId], references: [id])
+   ownerId Int
 }

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { EnumDatabasePrisma } from '../enums/enum.database.prisma';
+import { EnumDatabasePrisma } from '../../enums/enum.database.prisma';
 
 interface Reader<T> {
   find(): Promise<T[]>;

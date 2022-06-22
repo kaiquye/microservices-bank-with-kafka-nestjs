@@ -23,5 +23,9 @@ export class AccountController {
     console.log(specs);
     return this.accountService.validadeBalanceAndBarCode(specs);
   }
-  transfer() {}
+  @UseFilters(new ExceptionFilter())
+  @MessagePattern('teste2')
+  transfer() {
+    console.log('-----------');
+  }
 }

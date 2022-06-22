@@ -19,7 +19,7 @@ import {
 import { NewAccountDto } from './dto/new-account.dto';
 import { INewAccountInterface } from './interface/new-account.interface';
 import { AuthGuard } from '@nestjs/passport';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { NewTransferDto } from './dto/new-transfer.dto';
 import { InterceptorsSvc } from '../../interceptors/rpc.interceptor';
 
@@ -31,6 +31,7 @@ export class ProducersAccountController implements OnModuleInit {
 
   async onModuleInit() {
     this.producer.subscribeToResponseOf('validade-balance');
+    this.producer.subscribeToResponseOf('teste2');
     await this.producer.connect();
   }
 
@@ -48,8 +49,15 @@ export class ProducersAccountController implements OnModuleInit {
     console.log(body);
     const infos: NewTransferDto = { ...request.user, ...body };
     console.log(infos);
-    return this.producer
-      .send('validade-balance', { data: infos })
-      .pipe(catchError((err) => throwError(err)));
+    return this.producer.send('teste2', { data: 'data' });
+    // return this.producer
+    //   .send('validade-balance', { data: infos })
+    //   .pipe(
+    //     map((data) => {
+    //       console.log(data);
+    //       return this.producer.send('teste', { data: data });
+    //     }),
+    //   )
+    //   .pipe(catchError((err) => throwError(err)));
   }
 }

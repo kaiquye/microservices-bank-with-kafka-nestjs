@@ -7,6 +7,8 @@ import { generating } from './util/generator_key.util';
 import { createTracing } from 'trace_events';
 import { TransferValueDto } from './dto/transfer-value.dto';
 import { AppError } from '../../models/error/error.model';
+import { AcessTokenTransferCommon } from '../../common/acess-token-transfer.common';
+import { Client } from '@nestjs/microservices';
 
 @Injectable()
 export class AccountService {
@@ -52,18 +54,20 @@ export class AccountService {
     }
   }
   async validadeBalanceAndBarCode(data: TransferValueDto) {
-    try {
-      const existsAccount = await this.accountRepository.findByBarCode(
-        data.bar_code_to_transfer,
-      );
-      if (!existsAccount)
-        return new AppError('account not found', 404).rpcException;
-      const { account } = await this.accountRepository.validadeBalancde(data);
-      if (account[0].balance < data.value)
-        return new AppError('balancde invalid', 400).rpcException;
-      console.log(account[0].balance, data);
-    } catch (err) {
-      console.log(err);
-    }
+    console.log(data);
+    const existsAccount = await this.accountRepository.findByBarCode(
+      data.bar_code_to_transfer,
+    );
+    if (!existsAccount)
+      throw new AppError('account not found', 404).rpcException;
+    const { account } = await this.accountRepository.validadeBalancde(data);
+    if (account[0].balance < data.value)
+      return new AppError('balancde invalid', 400).rpcException;
+    return {
+      acess_token: AcessTokenTransferCommon().generete({
+        email: data.email,
+        bar_code_to_transfer: data.bar_code_to_transfer,
+      }),
+    };
   }
 }

@@ -1,8 +1,11 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Controller, UseFilters } from '@nestjs/common';
+import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 import { AccountService } from './account.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { KafkaMessage } from 'kafkajs';
+import { TransferValueDto } from './dto/transfer-value.dto';
+import { AppError } from '../../models/error/error.model';
+import { ExceptionFilter } from '../../models/error/rpc.model';
 
 @Controller()
 export class AccountController {
@@ -13,4 +16,12 @@ export class AccountController {
     const data: CreateAccountDto = { ...value['data'] };
     return this.accountService.create(data);
   }
+  @UseFilters(new ExceptionFilter())
+  @MessagePattern('validade-balance')
+  validadeBalance(@Payload() { value }: KafkaMessage) {
+    const specs: TransferValueDto = { ...value['data'] };
+    console.log(specs);
+    return this.accountService.validadeBalanceAndBarCode(specs);
+  }
+  transfer() {}
 }

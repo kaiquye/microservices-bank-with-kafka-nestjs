@@ -7,4 +7,5 @@ export class TransferValueDto implements CreateAccountDto {
   phone: number;
   value: number;
   bar_code_to_transfer: string;
+  acess_token: string;
 }

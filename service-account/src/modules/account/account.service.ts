@@ -70,4 +70,8 @@ export class AccountService {
       }),
     };
   }
+  async transfer(data: TransferValueDto) {
+    //AcessTokenTransferCommon().valid(data.acess_token);
+    this.accountRepository.transfer(data);
+  }
 }

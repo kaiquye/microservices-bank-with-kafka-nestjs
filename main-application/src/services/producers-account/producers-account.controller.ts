@@ -45,19 +45,20 @@ export class ProducersAccountController implements OnModuleInit {
   }
 
   @Post('transfer')
-  newTransfer(@Body() body: NewTransferDto, @Req() request): Observable<any> {
+  newTransfer(@Body() body: NewTransferDto, @Req() request) {
     console.log(body);
     const infos: NewTransferDto = { ...request.user, ...body };
     console.log(infos);
-    return this.producer.send('teste2', { data: 'data' });
-    // return this.producer
-    //   .send('validade-balance', { data: infos })
-    //   .pipe(
-    //     map((data) => {
-    //       console.log(data);
-    //       return this.producer.send('teste', { data: data });
-    //     }),
-    //   )
-    //   .pipe(catchError((err) => throwError(err)));
+    return this.producer
+      .send('validade-balance', { data: infos })
+      .pipe(
+        map((data) => {
+          console.log(data);
+          return this.producer.emit('new-transfer', {
+            data: { ...infos, ...data },
+          });
+        }),
+      )
+      .pipe(catchError((err) => throwError(err)));
   }
 }

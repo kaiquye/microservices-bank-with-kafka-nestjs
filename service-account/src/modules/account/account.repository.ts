@@ -83,4 +83,32 @@ export class AccountRepository extends AbstractRepositoryPrisma<IAccount> {
       },
     });
   }
+
+  async transfer(data: TransferValueDto) {
+    console.log(data.value, data.bar_code_to_transfer);
+    const { id } = await this.prisma.oWNER.findFirst({
+      where: {
+        email: data.email,
+      },
+      select: {
+        id: true,
+      },
+    });
+    await this.prisma.$transaction([
+      this.prisma.aCCOUNT.update({
+        where: {
+          id: id,
+        },
+        data: {
+          balance: { increment: -Number(data.value) },
+        },
+      }),
+      this.prisma.aCCOUNT.update({
+        where: {
+          bar_code: data.bar_code_to_transfer,
+        },
+        data: { balance: { increment: +Number(data.value) } },
+      }),
+    ]);
+  }
 }

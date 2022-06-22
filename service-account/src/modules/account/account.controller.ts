@@ -10,7 +10,6 @@ import { ExceptionFilter } from '../../models/error/rpc.model';
 @Controller()
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
-
   @MessagePattern('create-account')
   create(@Payload() { value }: KafkaMessage) {
     const data: CreateAccountDto = { ...value['data'] };
@@ -24,8 +23,10 @@ export class AccountController {
     return this.accountService.validadeBalanceAndBarCode(specs);
   }
   @UseFilters(new ExceptionFilter())
-  @MessagePattern('teste2')
-  transfer() {
-    console.log('-----------');
+  @MessagePattern('new-transfer')
+  transfer(@Payload() { value }: KafkaMessage) {
+    console.log(value);
+    const data: TransferValueDto = { ...value['data'] };
+    return this.accountService.transfer(data);
   }
 }

@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAccountDto } from './dto/create-account.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
+import { AccountRepository } from './account.repository';
+import { typeNewAccountSpecs } from './interface/newAccount.type';
+import { hashSync } from 'bcrypt';
+import { generating } from './util/generator_key.util';
 
 @Injectable()
 export class AccountService {
-  create(createAccountDto: CreateAccountDto) {
-    return 'This action adds a new account';
-  }
-
-  findAll() {
-    return `This action returns all account`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} account`;
-  }
-
-  update(id: number, updateAccountDto: UpdateAccountDto) {
-    return `This action updates a #${id} account`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} account`;
+  constructor(private accountRepository: AccountRepository) {}
+  async create(createAccountDto: CreateAccountDto) {
+    try {
+      const specsNewAccount: typeNewAccountSpecs = {
+        ...createAccountDto,
+        active: true,
+        balance: 0,
+        bar_code: generating(createAccountDto.phone).number().toString(),
+        model: 'current',
+      };
+      await this.accountRepository.createAccountByOwner(specsNewAccount);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

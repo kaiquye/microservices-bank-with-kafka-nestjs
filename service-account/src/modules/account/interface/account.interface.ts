@@ -1,4 +1,4 @@
-export class Account {
+export class IAccount {
   id?: number;
   bar_code: string;
   model: string;

@@ -17,6 +17,7 @@ model OWNER {
     createAt DateTime @default(now())
     account ACCOUNT[]
     history_of_transfers HIST_TRANSFERS[]
+    account_inactive ACCOUNT_INACTIVE[]
 }
 
 model ACCOUNT {
@@ -24,8 +25,19 @@ model ACCOUNT {
    bar_code String @unique
    model String
    balance BigInt @default(0)
+   status String @default("processing")
    owner OWNER  @relation(fields: [ownerId], references: [id])
    ownerId Int
+}
+
+model ACCOUNT_INACTIVE {
+        id       Int       @id @default(autoincrement())
+        bar_code String @unique
+        model String
+        balance BigInt @default(0)
+        status String @default("inactive")
+        owner OWNER  @relation(fields: [ownerId], references: [id])
+        ownerId Int
 }
 
 model HIST_TRANSFERS {
@@ -39,3 +51,4 @@ model HIST_TRANSFERS {
    owner OWNER  @relation(fields: [ownerId], references: [id])
    ownerId Int
 }
+

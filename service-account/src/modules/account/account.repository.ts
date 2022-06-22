@@ -28,4 +28,23 @@ export class AccountRepository extends AbstractRepositoryPrisma<IAccount> {
       include: { account: true },
     });
   }
+
+  createAccountInactive(data: typeNewAccountSpecs) {
+    return this.prisma.oWNER.create({
+      data: {
+        phone: data.phone,
+        fist_name: data.fist_name,
+        active: data.active,
+        email: data.email,
+        account_inactive: {
+          create: {
+            bar_code: data.bar_code,
+            balance: data.balance,
+            model: data.model,
+          },
+        },
+      },
+      include: { account_inactive: true },
+    });
+  }
 }

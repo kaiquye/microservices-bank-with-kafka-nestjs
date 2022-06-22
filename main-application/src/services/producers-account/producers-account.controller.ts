@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Inject,
   OnModuleInit,
   Patch,
@@ -31,7 +32,7 @@ export class ProducersAccountController implements OnModuleInit {
 
   async onModuleInit() {
     this.producer.subscribeToResponseOf('validade-balance');
-    this.producer.subscribeToResponseOf('teste2');
+    this.producer.subscribeToResponseOf('hist_trasnfer');
     await this.producer.connect();
   }
 
@@ -60,5 +61,10 @@ export class ProducersAccountController implements OnModuleInit {
         }),
       )
       .pipe(catchError((err) => throwError(err)));
+  }
+  @Get('hist')
+  hist_trasnfer(@Req() request): Observable<any> {
+    const data = { ...request.user };
+    return this.producer.send('hist_trasnfer', { data });
   }
 }

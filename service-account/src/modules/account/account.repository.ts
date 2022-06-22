@@ -5,6 +5,7 @@ import { EnumDatabasePrisma } from '../../enums/enum.database.prisma';
 import { Injectable } from '@nestjs/common';
 import { typeNewAccountSpecs } from './interface/newAccount.type';
 import { TransferValueDto } from './dto/transfer-value.dto';
+import { dateTimeNow } from '../../utils/formart-data.utils.ts/formart-data.utils';
 
 @Injectable()
 export class AccountRepository extends AbstractRepositoryPrisma<IAccount> {
@@ -86,18 +87,24 @@ export class AccountRepository extends AbstractRepositoryPrisma<IAccount> {
 
   async transfer(data: TransferValueDto) {
     console.log(data.value, data.bar_code_to_transfer);
-    const { id } = await this.prisma.oWNER.findFirst({
+    const specs = await this.prisma.oWNER.findFirst({
       where: {
         email: data.email,
       },
       select: {
         id: true,
+        account: {
+          select: {
+            bar_code: true,
+          },
+        },
       },
     });
+    console.log(specs);
     await this.prisma.$transaction([
       this.prisma.aCCOUNT.update({
         where: {
-          id: id,
+          bar_code: specs.account[0].bar_code,
         },
         data: {
           balance: { increment: -Number(data.value) },
@@ -108,6 +115,16 @@ export class AccountRepository extends AbstractRepositoryPrisma<IAccount> {
           bar_code: data.bar_code_to_transfer,
         },
         data: { balance: { increment: +Number(data.value) } },
+      }),
+      this.prisma.hIST_TRANSFERS.create({
+        data: {
+          bar_code_to_transfer: data.bar_code_to_transfer,
+          date_transfer_accepted: new Date(dateTimeNow()),
+          accepted: true,
+          value: data.value,
+          bar_code_owner: data.bar_code_to_transfer,
+          ownerId: specs.id,
+        },
       }),
     ]);
   }

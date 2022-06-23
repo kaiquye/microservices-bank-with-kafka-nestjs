@@ -16,7 +16,7 @@ const database_enum_1 = require("../../enums/database.enum");
 const common_1 = require("@nestjs/common");
 let AddressRepository = class AddressRepository extends abstract_repository_1.AbstractRepositoryPrisma {
     constructor(prisma) {
-        super(database_enum_1.EnumDatabasePrisma.address, prisma);
+        super(database_enum_1.EnumDatabasePrisma.OWNER, prisma);
         this.prisma = prisma;
     }
     registrerAddressByOwner(data) {

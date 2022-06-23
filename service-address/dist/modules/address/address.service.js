@@ -24,7 +24,7 @@ let AddressService = class AddressService {
             phone: createAddressDto.phone,
             email: createAddressDto.email,
         });
-        if (existsAddress) {
+        if (!existsAddress) {
             const address = await (0, find_address_userCases_1.FindAddressUserCases)(createAddressDto.zipcode);
             const data = Object.assign(Object.assign({}, address), createAddressDto);
             if (address) {

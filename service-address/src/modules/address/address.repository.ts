@@ -8,7 +8,7 @@ import { IOwner } from './interfaces/owner.interface';
 @Injectable()
 export class AddressRepository extends AbstractRepositoryPrisma<IAddress> {
   constructor(private prisma: PrismaService) {
-    super(EnumDatabasePrisma.address, prisma);
+    super(EnumDatabasePrisma.OWNER, prisma);
   }
 
   registrerAddressByOwner(data: IAddress & IOwner) {

@@ -22,11 +22,7 @@ let AddressController = class AddressController {
     }
     registreAddress({ value }) {
         const data = Object.assign({}, value['data']);
-        console.log('---------', data);
         return this.addressService.create(data);
-    }
-    teste() {
-        console.log('-----------');
     }
 };
 __decorate([
@@ -36,12 +32,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AddressController.prototype, "registreAddress", null);
-__decorate([
-    (0, microservices_1.MessagePattern)('teste'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AddressController.prototype, "teste", null);
 AddressController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [address_service_1.AddressService])

@@ -12,12 +12,6 @@ export class AddressController {
   @MessagePattern('create-account')
   registreAddress(@Payload() { value }: KafkaMessage) {
     const data: CreateAddressDto & IOwner = { ...value['data'] };
-    console.log('---------', data);
     return this.addressService.create(data);
-  }
-
-  @MessagePattern('teste')
-  teste() {
-    console.log('-----------');
   }
 }

@@ -17,7 +17,7 @@ export class AddressService {
       phone: createAddressDto.phone,
       email: createAddressDto.email,
     });
-    if (existsAddress) {
+    if (!existsAddress) {
       const address: IAddress = await FindAddressUserCases(
         createAddressDto.zipcode,
       );

@@ -20,6 +20,7 @@ let AlreadyExistsAddressByOwnerUseCases = class AlreadyExistsAddressByOwnerUseCa
         const data = await this.addressRepository.exists(false, {
             OR: [{ phone: params.phone }, { email: params.email }],
         });
+        console.log(data);
         if (data)
             return true;
         return false;

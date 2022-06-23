@@ -1,3 +1,3 @@
 export enum EnumDatabasePrisma {
-  address = 'address',
+  OWNER = 'OWNER',
 }

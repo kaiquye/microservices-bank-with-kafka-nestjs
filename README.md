@@ -11,8 +11,8 @@ Existe 4 micro-serviços trabalhando em conjunto : Autenticação, Proprietario,
 ## ⚙ Serviços  
 
 - 🎈 **Aplicação principal**
-  - 👤 **Owner** : Este serviço é responsável por gerenciador todas as rotas e mensagens do mesmo.
-  - 👮🏼‍♀️ **auth** : Esse módulo é reponsável pela autenticação de todos os usuarios...
+  - 👤 **Owner** : Esse serviço é responsável por gerenciador todas as rotas e mensagens do mesmo.
+  - 👮🏼‍♀️ **auth** : Esse serviço é reponsável pela autenticação de todos os usuarios...
 
 #### 🎲 database 
 Existe um banco de dados separado para estes serviços, `microservice-main-application`, nele fica todas as informações necessaria para a aplicação 

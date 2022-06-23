@@ -1,0 +1,32 @@
+-- CreateTable
+CREATE TABLE `OWNER` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `fist_name` VARCHAR(191) NOT NULL,
+    `phone` BIGINT NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `active` BOOLEAN NOT NULL DEFAULT true,
+    `createAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    UNIQUE INDEX `OWNER_phone_key`(`phone`),
+    UNIQUE INDEX `OWNER_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `ADDRESS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `cep` VARCHAR(191) NOT NULL,
+    `logradouro` VARCHAR(191) NOT NULL,
+    `complemento` VARCHAR(191) NOT NULL,
+    `bairro` VARCHAR(191) NOT NULL,
+    `localidade` VARCHAR(191) NOT NULL,
+    `uf` VARCHAR(191) NOT NULL,
+    `gia` VARCHAR(191) NOT NULL,
+    `ddd` VARCHAR(191) NOT NULL,
+    `ownerId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `ADDRESS` ADD CONSTRAINT `ADDRESS_ownerId_fkey` FOREIGN KEY (`ownerId`) REFERENCES `OWNER`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -20,16 +20,14 @@ model OWNER {
 
 model ADDRESS {
    id       Int       @id @default(autoincrement())
-   cep: String,
-   logradouro: String,
-   complemento: String,
-   bairro: String,
-   localidade: String,
-   uf: String,
-   ibge:String,
-   gia: String,
-   ddd: String,
-   siafi: String
+   cep String
+   logradouro String
+   complemento String
+   bairro String
+   localidade String
+   uf String
+   gia String
+   ddd String
    owner OWNER  @relation(fields: [ownerId], references: [id])
    ownerId Int
 }

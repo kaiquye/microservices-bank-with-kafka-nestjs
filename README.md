@@ -76,24 +76,21 @@ Existe um banco de dados separado para estes serviços,`microservice-service-acc
 ```
 - 🏠 Serviço de endereço 
 - **service-address** : Este serviço é responsável por buscar informações sobre o endereço em uma API publica, cadastra esse endereço no banco.
-caso o endereço não seja valido, ele salva em uma tabela diferente, informando sobre a inconsistencia dos dados.
+Caso o endereço não seja valido, ele salva em uma tabela diferente, informando sobre a inconsistencia dos dados.
 
 
 ```json
 
-model OWNER {
-    id       Int       @id @default(autoincrement())
-    fist_name String
-    phone BigInt @unique
-    email String @unique
-    active Boolean @default(true)
-    createAt DateTime @default(now())
-    address ADDRESS[]
-    address_temporary ADDRESS_TEMPORARY[]
+ OWNER {
+    "id" :      "Int"     
+    "fist_name" :"String"
+    "phone" :"BigInt" 
+    "email": "String"
+    "active" :"Boolean" 
 }
 
-model ADDRESS {
-   id       Int       @id @default(autoincrement())
+ ADDRESS {
+   id       Int     
    cep String
    logradouro String
    complemento String
@@ -102,14 +99,14 @@ model ADDRESS {
    uf String
    gia String
    ddd String
-   owner OWNER  @relation(fields: [ownerId], references: [id])
+   owner OWNER  
    ownerId Int
 }
 
-model ADDRESS_TEMPORARY {
-  id       Int       @id @default(autoincrement())
+ ADDRESS_TEMPORARY {
+  id       
   status String
-  owner OWNER  @relation(fields: [ownerId], references: [id])
+  owner OWNER  
   ownerId Int
 }
 

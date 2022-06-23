@@ -1,12 +1,11 @@
 ### 🍀 microservices bank with kafka nestjs
 
-## Sobre
-Projeto desenvolvido para estudos. 
+## Sobre 
 Neste projeto eu desenvolvo um sistema baseado na arquitetura de microservices utilizando kafka e nestsjs, com banco de dados ( não compartilhado ) MYSQL. 
 
 
 ## Arquitetura 
-Existe 4 micro-serviços trabalhando em conjunto : Autenticação, Proprietario, Conta, Endereço.
+Existe 4 micro-serviços trabalhando em conjunto : Autenticação, Proprietario, Conta, Endereço. 
 
 ## ⚙ Serviços  
 

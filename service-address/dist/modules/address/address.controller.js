@@ -22,15 +22,15 @@ let AddressController = class AddressController {
     }
     registreAddress({ value }) {
         const data = Object.assign({}, value['data']);
+        console.log(data);
         return this.addressService.create(data);
-        console.log(createAddressDto);
     }
 };
 __decorate([
     (0, microservices_1.MessagePattern)('create-account'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [microservices_1.ClientKafka]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AddressController.prototype, "registreAddress", null);
 AddressController = __decorate([

@@ -16,7 +16,10 @@ export class AddressService {
     if (address) {
       await this.addresRepository.registrerAddressByOwner(data);
     } else {
-      await this.addresRepository.create({});
+      await this.addresRepository.registerTemporaryAddressByOwner(
+        data,
+        createAddressDto.zipcode,
+      );
     }
   }
 }

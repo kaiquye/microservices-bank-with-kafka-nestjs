@@ -34,4 +34,22 @@ export class AddressRepository extends AbstractRepositoryPrisma<IAddress> {
       include: { address: true },
     });
   }
+
+  registerTemporaryAddressByOwner(data: IOwner, zipcode: string | number) {
+    return this.prisma.oWNER.create({
+      data: {
+        email: data.email,
+        phone: data.phone,
+        fist_name: data.fist_name,
+        active: false,
+        address_temporary: {
+          create: {
+            status:
+              'zip code not found or undefined, try registering with a new zip code',
+          },
+        },
+      },
+      include: { address_temporary: true },
+    });
+  }
 }

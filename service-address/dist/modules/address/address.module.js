@@ -10,12 +10,14 @@ exports.AddressModule = void 0;
 const common_1 = require("@nestjs/common");
 const address_service_1 = require("./address.service");
 const address_controller_1 = require("./address.controller");
+const address_repository_1 = require("./address.repository");
+const config_database_1 = require("../../database/config.database");
 let AddressModule = class AddressModule {
 };
 AddressModule = __decorate([
     (0, common_1.Module)({
         controllers: [address_controller_1.AddressController],
-        providers: [address_service_1.AddressService]
+        providers: [address_service_1.AddressService, address_repository_1.AddressRepository, config_database_1.PrismaService],
     })
 ], AddressModule);
 exports.AddressModule = AddressModule;

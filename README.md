@@ -3,7 +3,7 @@
 ## 🚶🏼‍♂️ Funcionalidades 
 - Nova conta : Se cadastrar na API.
 - Autenticação : Se autenticar na API.
-- Finalizar conta : Registrar uma nova conta bancaria, gerando numero da conta, saldo..
+- Finalizar conta : Registrar uma nova conta bancária, gerando numero da conta, saldo..
 - Transferências : Fazer novas transferências. 
 - Validar transferências : Verifica no banco de dados qual o status da transferências.
 - Novo endereço : Ao finalizar uma conta é opsional passar um CEP para vincular um endereço a sua conta no service-address. 

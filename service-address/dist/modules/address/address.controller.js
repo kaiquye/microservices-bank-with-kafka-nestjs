@@ -20,7 +20,9 @@ let AddressController = class AddressController {
     constructor(addressService) {
         this.addressService = addressService;
     }
-    registreAddress(createAddressDto) {
+    registreAddress({ value }) {
+        const data = Object.assign({}, value['data']);
+        return this.addressService.create(data);
         console.log(createAddressDto);
     }
 };

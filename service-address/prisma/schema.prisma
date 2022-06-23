@@ -16,6 +16,7 @@ model OWNER {
     active Boolean @default(true)
     createAt DateTime @default(now())
     address ADDRESS[]
+    address_temporary ADDRESS_TEMPORARY[]
 }
 
 model ADDRESS {
@@ -30,4 +31,11 @@ model ADDRESS {
    ddd String
    owner OWNER  @relation(fields: [ownerId], references: [id])
    ownerId Int
+}
+
+model ADDRESS_TEMPORARY {
+  id       Int       @id @default(autoincrement())
+  status String
+  owner OWNER  @relation(fields: [ownerId], references: [id])
+  ownerId Int
 }

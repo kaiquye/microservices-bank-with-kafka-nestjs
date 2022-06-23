@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
+const config_1 = require("@nestjs/config");
 const microservices_1 = require("@nestjs/microservices");
 async function bootstrap() {
-    ConfigModule.forRoot({
+    config_1.ConfigModule.forRoot({
         isGlobal: true,
     });
     const app = await core_1.NestFactory.createMicroservice(app_module_1.AppModule, {

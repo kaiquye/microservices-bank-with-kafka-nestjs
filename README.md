@@ -1,13 +1,14 @@
 ### 🍀 microservices bank with kafka nestjs
 
-
-## ⚙ Services 
-
-- **main-aplication**
-- **service-account**
-- **service-address**
+## Sobre
+Projeto desenvolvido para estudos. 
+Neste projeto eu desenvolvo um sistema baseado na arquitetura de microservices utilizando kafka e nestsjs, com banco de dados ( não compartilhado ) MYSQL. 
 
 
+## Arquitetura 
+Existe 4 micro-serviços trabalhando em conjunto : Autenticação, Proprietario, Conta, Endereço.
+
+## ⚙ Serviços  
 
 - 🎈 **Aplicação principal**
   - 👤 **Owner** : Este serviço é responsável por gerenciador todas as rotas e mensagens do mesmo.
@@ -34,8 +35,9 @@ principal funcionar.
 
 - 💸 **Serviço de conta** 
   -  **service-account** : Este módulo é responsável por fazer transferencias, ValidarTrasnferencias, DesativarConta, validarSaldo...
+  -  Esse módulo so se comunica por meio de mensageria.
 #### 🎲 database 
-Existe um banco de dados separado para estes serviços,`microservice-service-account`, nele fica todas as informações necessaria para o micro serviço de conta funcionar ( validação de usuario, auteticação e envios de mensagens )
+Existe um banco de dados separado para estes serviço, `microservice-service-account`. 
 ```json
  "OWNER" {
     "id": "Int"    
@@ -77,11 +79,12 @@ Existe um banco de dados separado para estes serviços,`microservice-service-acc
 - 🏠 Serviço de endereço 
 - **service-address** : Este serviço é responsável por buscar informações sobre o endereço em uma API publica, cadastra esse endereço no banco.
 Caso o endereço não seja valido, ele salva em uma tabela diferente, informando sobre a inconsistencia dos dados.
-
-
+-  Esse módulo so se comunica por meio de mensageria.
+#### 🎲 database 
+Existe um banco de dados separado para estes serviço, `microservice-service-address`. 
 ```json
 
- OWNER {
+ "OWNER": {
     "id" :      "Int"     
     "fist_name" :"String"
     "phone" :"BigInt" 
@@ -89,25 +92,23 @@ Caso o endereço não seja valido, ele salva em uma tabela diferente, informando
     "active" :"Boolean" 
 }
 
- ADDRESS {
-   id       Int     
-   cep String
-   logradouro String
-   complemento String
-   bairro String
-   localidade String
-   uf String
-   gia String
-   ddd String
-   owner OWNER  
-   ownerId Int
+ "ADDRESS": {
+   "id"  :     "Int"     
+   "cep": String
+   "logradouro": "String"
+   "complemento" :"String"
+   "bairro": "String"
+   "localidade": "String
+   "uf": "String"
+   "gia": "String"
+   "ddd": "String"
+   "ownerId": "Int"
 }
 
- ADDRESS_TEMPORARY {
-  id       
-  status String
-  owner OWNER  
-  ownerId Int
+ "ADDRESS_TEMPORARY": {
+  "id": "int"       
+  "status": "String"
+  "ownerId": "Int"
 }
 
 ```

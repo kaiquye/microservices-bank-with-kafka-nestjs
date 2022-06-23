@@ -9,7 +9,7 @@
 - Novo endereço : Ao finalizar uma conta é opsional passar um CEP para vincular um endereço a sua conta no service-address. 
 
 ## 📓 Sobre 
-Neste projeto eu desenvolvo um sistema baseado na arquitetura de microservices utilizando kafka e nestsjs, com banco de dados ( não compartilhado ) MYSQL. 
+Neste projeto eu desenvolvo um sistema baseado na arquitetura de microservices utilizando kafka e nestsjs, com banco de dados não compartilhado ( cada micro-serviço tem seu banco de dados ) em MYSQL. 
 
 
 ## 🏛 Arquitetura 

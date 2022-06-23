@@ -13,24 +13,33 @@ exports.AddressService = void 0;
 const common_1 = require("@nestjs/common");
 const find_address_userCases_1 = require("./useCases/find-address.userCases");
 const address_repository_1 = require("./address.repository");
+const already_exists_addressByOwner_useCases_1 = require("./useCases/already-exists-addressByOwner.useCases");
 let AddressService = class AddressService {
-    constructor(addresRepository) {
+    constructor(addresRepository, alreadyExists) {
         this.addresRepository = addresRepository;
+        this.alreadyExists = alreadyExists;
     }
     async create(createAddressDto) {
-        const address = await (0, find_address_userCases_1.FindAddressUserCases)(createAddressDto.zipcode);
-        const data = Object.assign(Object.assign({}, address), createAddressDto);
-        if (address) {
-            await this.addresRepository.registrerAddressByOwner(data);
-        }
-        else {
-            await this.addresRepository.registerTemporaryAddressByOwner(data, createAddressDto.zipcode);
+        const existsAddress = await this.alreadyExists.alreadExists({
+            phone: createAddressDto.phone,
+            email: createAddressDto.email,
+        });
+        if (existsAddress) {
+            const address = await (0, find_address_userCases_1.FindAddressUserCases)(createAddressDto.zipcode);
+            const data = Object.assign(Object.assign({}, address), createAddressDto);
+            if (address) {
+                await this.addresRepository.registrerAddressByOwner(data);
+            }
+            else {
+                await this.addresRepository.registerTemporaryAddressByOwner(data, createAddressDto.zipcode);
+            }
         }
     }
 };
 AddressService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [address_repository_1.AddressRepository])
+    __metadata("design:paramtypes", [address_repository_1.AddressRepository,
+        already_exists_addressByOwner_useCases_1.AlreadyExistsAddressByOwnerUseCases])
 ], AddressService);
 exports.AddressService = AddressService;
 //# sourceMappingURL=address.service.js.map

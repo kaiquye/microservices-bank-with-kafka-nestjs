@@ -4,4 +4,5 @@ export declare class AddressController {
     private readonly addressService;
     constructor(addressService: AddressService);
     registreAddress({ value }: KafkaMessage): Promise<void>;
+    teste(): void;
 }

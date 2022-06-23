@@ -12,12 +12,18 @@ const address_service_1 = require("./address.service");
 const address_controller_1 = require("./address.controller");
 const address_repository_1 = require("./address.repository");
 const config_database_1 = require("../../database/config.database");
+const already_exists_addressByOwner_useCases_1 = require("./useCases/already-exists-addressByOwner.useCases");
 let AddressModule = class AddressModule {
 };
 AddressModule = __decorate([
     (0, common_1.Module)({
         controllers: [address_controller_1.AddressController],
-        providers: [address_service_1.AddressService, address_repository_1.AddressRepository, config_database_1.PrismaService],
+        providers: [
+            address_service_1.AddressService,
+            address_repository_1.AddressRepository,
+            config_database_1.PrismaService,
+            already_exists_addressByOwner_useCases_1.AlreadyExistsAddressByOwnerUseCases,
+        ],
     })
 ], AddressModule);
 exports.AddressModule = AddressModule;

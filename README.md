@@ -34,8 +34,8 @@ principal funcionar.
 
 
 - 💸 **Serviço de conta** 
-  -  **service-account** : Este módulo é responsável por fazer transferencias, ValidarTrasnferencias, DesativarConta, validarSaldo...
-  -  Esse módulo so se comunica por meio de mensageria.
+  -  **service-account** : Este módulo é responsável por fazer transferências, ValidarTransferências, DesativarConta, validarSaldo...
+  -  Esse serviço so se comunica por meio de mensageria.
 #### 🎲 database 
 Existe um banco de dados separado para estes serviço, `microservice-service-account`. 
 ```json
@@ -79,7 +79,7 @@ Existe um banco de dados separado para estes serviço, `microservice-service-acc
 - 🏠 Serviço de endereço 
 - **service-address** : Este serviço é responsável por buscar informações sobre o endereço em uma API publica, cadastra esse endereço no banco.
 Caso o endereço não seja valido, ele salva em uma tabela diferente, informando sobre a inconsistencia dos dados.
--  Esse módulo so se comunica por meio de mensageria.
+-  Esse serviço so se comunica por meio de mensageria.
 #### 🎲 database 
 Existe um banco de dados separado para estes serviço, `microservice-service-address`. 
 ```json

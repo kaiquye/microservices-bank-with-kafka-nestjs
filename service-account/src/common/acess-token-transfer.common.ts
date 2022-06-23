@@ -6,7 +6,7 @@ export function AcessTokenTransferCommon() {
     valid: (token: string) => {
       try {
         const isValid = verify(token, '000000000');
-        if (isValid)
+        if (!isValid)
           return new AppError('invalid acess_token', 401).rpcException;
       } catch (e) {
         return new AppError('invalid acess_token', 401).rpcException;

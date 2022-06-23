@@ -27,11 +27,7 @@ export class AccountController {
   transfer(@Payload() { value }: KafkaMessage) {
     console.log(value);
     const data: TransferValueDto = { ...value['data'] };
+    console.log(data.acess_token);
     return this.accountService.transfer(data);
-  }
-  @UseFilters(new ExceptionFilter())
-  @MessagePattern('hist_trasnfer')
-  hist_trasnfer(@Payload() { value }: KafkaMessage) {
-    console.log(value);
   }
 }

@@ -127,5 +127,13 @@ export class AccountRepository extends AbstractRepositoryPrisma<IAccount> {
         },
       }),
     ]);
+    return {
+      bar_code_to_transfer: data.bar_code_to_transfer,
+      date_transfer_accepted: new Date(dateTimeNow()),
+      accepted: true,
+      value: data.value,
+      bar_code_owner: data.bar_code_to_transfer,
+      ownerId: specs.id,
+    };
   }
 }

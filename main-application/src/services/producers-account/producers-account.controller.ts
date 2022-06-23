@@ -62,9 +62,4 @@ export class ProducersAccountController implements OnModuleInit {
       )
       .pipe(catchError((err) => throwError(err)));
   }
-  @Get('hist')
-  hist_trasnfer(@Req() request): Observable<any> {
-    const data = { ...request.user };
-    return this.producer.send('hist_trasnfer', { data });
-  }
 }

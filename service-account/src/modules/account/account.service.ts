@@ -71,7 +71,7 @@ export class AccountService {
     };
   }
   async transfer(data: TransferValueDto) {
-    //AcessTokenTransferCommon().valid(data.acess_token);
-    this.accountRepository.transfer(data);
+    AcessTokenTransferCommon().valid(data.acess_token);
+    return this.accountRepository.transfer(data);
   }
 }

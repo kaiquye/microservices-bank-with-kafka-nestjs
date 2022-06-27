@@ -24,6 +24,7 @@ Existe 4 micro-serviços trabalhando em conjunto : Autenticação, Proprietario,
 #### 🎲 database 
 Existe um banco de dados separado para estes serviços, `microservice-main-application`, nele fica todas as informações necessaria para a aplicação 
 principal funcionar.
+
 ```json
 {
    "OWNER" {
